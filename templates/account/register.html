@@ -4,7 +4,17 @@
 
 {% block content %}
 {% load static %}
-<form id="form1" action="/account/register" method="POST" onsubmit="return false">
+
+<div>
+    <h4>
+        Вы уже зарегестрированы? &nbsp > &nbsp > &nbsp >
+        <span>
+           <a style="color: blue; font-size: 0.8em" href="/account/entry">Вход</a>
+        </span>
+    </h4>
+</div>
+
+<form id="form1" action="/account/register" method="POST" onsubmit="return true">
     {% csrf_token %}
     <p>
         <label for="login">Логин:</label><br>
@@ -50,4 +60,5 @@
         margin-right: 5px;
     }
 </style>
+<script src="{% static 'js/register.js' %}"></script>
 {% endblock content %}
