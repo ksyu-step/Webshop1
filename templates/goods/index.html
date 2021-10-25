@@ -189,16 +189,18 @@
             </div>
             <!-- /ASIDE -->
 
+
+
             <!-- STORE -->
             <div id="store" class="col-md-9">
                 <!-- store products -->
                 <div class="row">
-                    {% for p in all_products %}
+                    {% for p in products %}
                         <!-- product -->
-                        <div class="col-md-4 col-xs-6">
-                            <div class="product">
+                        <div class="col-md-4 col-xs-6" >
+                            <div class="product" >
                                 <div class="product-img">
-                                    <img src="/media/{{ p.picture }}" alt="">
+                                    <img src="/media/{{ p.picture }}">
                                     <div class="product-label">
                                         <span class="sale">-30%</span>
                                         <span class="new">NEW</span>
@@ -222,6 +224,7 @@
                                     </div>
                                 </div>
                                 <div class="add-to-cart">
+                                    <input type="hidden" value="{{ user.id }}">
                                     <input type="hidden" value="{{ p.id }}">
                                     <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
                                 </div>
@@ -232,7 +235,31 @@
                 </div>
                 <!-- /store products -->
 
-                <!-- store bottom filter -->
+                <!-- my pagination  panel -->
+                <div class="pagination" style="margin-top: 20px">
+                    <span class="step-links">
+                        {% if products.has_previous %}
+                            <a href="?page=1">&laquo; First</a>
+                            &nbsp;
+                            <a href="?page={{ products.previous_page_number }}"></a>
+                        {% endif %}
+
+                        &nbsp;&nbsp;
+                        <span class="current">
+                            Page {{ products.number }} of {{ products.paginator.num_pages }}
+                        </span>
+                        &nbsp;&nbsp;
+                        {% if products.has_next %}
+                            <a href="?page={{ products.next_page_number }}">Next</a>
+                            <a href="?page={{ products.paginator.num_pages }}">Last &raquo;</a>
+                        {% endif %}
+
+                    </span>
+
+                <!-- /store -->
+
+                <!-- /store bottom filter -->
+
                 <div class="store-filter clearfix">
                     <span class="store-qty">Showing 20-100 products</span>
                     <ul class="store-pagination">
